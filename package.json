@@ -2,7 +2,7 @@
   "name": "shiver",
   "version": "0.0.1",
   "description": "Twitch on your desktop.",
-  "main": "main.js",
+  "main": "index.js",
   "repository": "bryanveloso/shiver-electron",
   "author": {
     "name": "Bryan Veloso",
