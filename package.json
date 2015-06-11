@@ -1,5 +1,30 @@
 {
-  "name"    : "Shiver",
-  "version" : "0.0.1",
-  "main"    : "main.js"
+  "name": "shiver",
+  "version": "0.0.1",
+  "description": "Twitch on your desktop.",
+  "main": "main.js",
+  "repository": "bryanveloso/shiver-electron",
+  "author": {
+    "name": "Bryan Veloso",
+    "email": "bryan@avalonstar.com",
+    "url": "http://avalonstar.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . Shiver --prune --asar --platform=darwin --arch=x64 --version=0.27.2"
+  },
+  "keywords": [
+    "electron-app",
+    "twitch"
+  ],
+  "dependencies": {
+    "electron-debug": "^0.1.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^4.1.2",
+    "electron-prebuilt": "^0.27.2"
+  }
 }
