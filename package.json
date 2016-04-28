@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "electron .",
+    "start": "node ./app/start.js",
     "build": "electron-packager . Shiver --prune --asar --platform=darwin --arch=x64 --version=0.27.2"
   },
   "keywords": [
