@@ -3,7 +3,7 @@
   "private": true,
   "version": "3.0.0",
   "description": "The perfect Twitch companion for your Mac or Windows PC or Linux PC. PogChamp",
-  "main": "index.js",
+  "main": "./app/index.js",
   "repository": "bryanveloso/shiver-electron",
   "author": {
     "name": "Bryan Veloso",
