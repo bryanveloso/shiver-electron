@@ -1,0 +1,11 @@
+{
+  "name": "Shiver",
+  "private": true,
+  "version": "3.0.0",
+  "description": "The perfect Twitch companion for your Mac or Windows PC or Linux PC. PogChamp",
+  "author": "Bryan Veloso <bryan@avalonstar.com>",
+  "main": "",
+  "dependencies": {
+    "electron-debug": "^0.5.2"
+  }
+}

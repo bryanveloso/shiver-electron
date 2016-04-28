@@ -1,7 +1,8 @@
 {
-  "name": "shiver",
-  "version": "0.0.1",
-  "description": "Twitch on your desktop.",
+  "name": "Shiver",
+  "private": true,
+  "version": "3.0.0",
+  "description": "The perfect Twitch companion for your Mac or Windows PC or Linux PC. PogChamp",
   "main": "index.js",
   "repository": "bryanveloso/shiver-electron",
   "author": {
@@ -18,11 +19,9 @@
   },
   "keywords": [
     "electron-app",
+    "shiver",
     "twitch"
   ],
-  "dependencies": {
-    "electron-debug": "^0.1.0"
-  },
   "devDependencies": {
     "electron-packager": "^4.1.2",
     "electron-prebuilt": "^0.27.2"
