@@ -4,8 +4,12 @@
   "version": "3.0.0",
   "description": "The perfect Twitch companion for your Mac or Windows PC or Linux PC. PogChamp",
   "author": "Bryan Veloso <bryan@avalonstar.com>",
-  "main": "",
+  "main": "./index.js",
   "dependencies": {
-    "electron-debug": "^0.5.2"
+    "body-parser": "1.15.0",
+    "cookie-parser": "1.4.1",
+    "cookie-session": "2.0.0-alpha.1",
+    "electron-debug": "^0.5.2",
+    "express": "4.13.4"
   }
 }

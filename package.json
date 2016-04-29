@@ -23,7 +23,7 @@
     "twitch"
   ],
   "devDependencies": {
-    "electron-packager": "^4.1.2",
-    "electron-prebuilt": "^0.27.2"
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "^0.37.7"
   }
 }
