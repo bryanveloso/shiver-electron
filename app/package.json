@@ -9,7 +9,14 @@
     "body-parser": "1.15.0",
     "cookie-parser": "1.4.1",
     "cookie-session": "2.0.0-alpha.1",
-    "electron-debug": "^0.5.2",
-    "express": "4.13.4"
+    "dotenv": "2.0.0",
+    "electron-debug": "^0.7.0",
+    "electron-prebuilt": "0.37.7",
+    "express": "4.13.4",
+    "express-handlebars": "3.0.0",
+    "morgan": "1.7.0",
+    "nconf": "0.8.4",
+    "passport": "0.3.2",
+    "passport-twitch": "1.0.2"
   }
 }

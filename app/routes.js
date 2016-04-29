@@ -1,12 +1,26 @@
-const express = require('express');
-const router = express.Router();
+'use strict';
 
+// Routers.
+module.exports = function(app, passport) {
+  app.get('/', function(req, res, next) {
+    if (req.user) { console.log(req.user.displayName); }
+    res.render('index', { user: req.user })
+  });
 
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
+  app.get('/auth/twitch', passport.authenticate('twitch'));
+  app.get('/auth/twitch/callback',
+    passport.authenticate('twitch', {
+      successRedirect: '/',
+      failureRedirect: '/'
+    })
+  );
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+}
 
-// router.get('/auth/twitch'); // Passport authentication.
-// router.get('/auth/twitch/callback'); // Passport callback.
-
-module.exports = router;
+function isLoggedIn(res, req, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}
