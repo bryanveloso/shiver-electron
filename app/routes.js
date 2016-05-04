@@ -1,10 +1,12 @@
 'use strict';
 
+const path = require('path');
+
 // Routers.
 module.exports = function(app, passport) {
   app.get('/', function(req, res, next) {
     if (req.user) { console.log(req.user.displayName); }
-    res.render('index', { user: req.user })
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
   });
 
   app.get('/auth/twitch', passport.authenticate('twitch'));
