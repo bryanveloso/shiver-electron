@@ -5,7 +5,6 @@ module.exports = {
   devtool: 'eval',
 
   entry: [
-    'webpack-hot-middleware/client?http://localhost:3030',
     './components/index'
   ],
   module: {
@@ -30,7 +29,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './public',
     historyApiFallback: true,
     hot: true,
     inline: true,

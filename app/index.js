@@ -13,7 +13,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const express = require('express');
-const handlebars  = require('express-handlebars');
 const http = require('http');
 const logger = require('morgan');
 const passport = require('passport');

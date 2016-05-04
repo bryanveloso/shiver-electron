@@ -4,7 +4,7 @@ const path = require('path');
 
 
 // Routers.
-module.exports = function(app, passport) {
+module.exports = function(app, db, passport) {
   app.get('/', function(req, res, next) {
     if (req.user) { console.log(req.user.displayName); }
     res.sendFile(path.resolve(__dirname, '../public', 'index.html'))
@@ -12,6 +12,7 @@ module.exports = function(app, passport) {
 
   app.get('/user', function(req, res) {
 
+    res.json({})
   });
 
   app.get('/auth/twitch', passport.authenticate('twitch'));

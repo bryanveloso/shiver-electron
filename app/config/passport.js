@@ -4,7 +4,7 @@ const TwitchStrategy = require('passport-twitch').Strategy;
 const config = require('./auth');
 
 
-module.exports = function(passport) {
+module.exports = function(db, passport) {
   passport.serializeUser(function(user, done) { done(null, user) });
   passport.deserializeUser(function(user, done) { done(null, user) });
 
