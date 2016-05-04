@@ -25,5 +25,8 @@
   "devDependencies": {
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.37.7"
+  },
+  "dependencies": {
+    "nedb": "1.8.0"
   }
 }

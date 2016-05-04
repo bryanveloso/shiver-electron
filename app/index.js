@@ -23,6 +23,14 @@ var server;
 const expressApp = express();
 const port = process.env.PORT || '3030';
 
+// Database stuff. ORGANIZE THIS LATER FOR THE LOVE OF GOD.
+const Datastore = require('nedb');
+const db = new Datastore({
+  filename: path.resolve(__dirname, 'config', 'user.db'),
+  autoload: true
+});
+
+
 // Listeners.
 function onListening() {
   mainWindow.loadURL('http://localhost:3030');
@@ -48,7 +56,7 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
-  require('./config/passport')(passport);
+  require('./config/passport')(db, passport);
 
   expressApp.use('/public', express.static(path.join(__dirname, 'public')))
 
@@ -66,7 +74,7 @@ app.on('ready', function() {
   expressApp.use(passport.session());
   expressApp.set('port', port);
 
-  require('./config/routes')(expressApp, passport);
+  require('./config/routes')(expressApp, db, passport);
 
   // Open the devtools.
   mainWindow.openDevTools();

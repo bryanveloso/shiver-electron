@@ -1,5 +1,8 @@
+'use strict';
+
 const TwitchStrategy = require('passport-twitch').Strategy;
 const config = require('./auth');
+
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) { done(null, user) });
@@ -14,9 +17,22 @@ module.exports = function(passport) {
     },
     function(accessToken, refreshToken, profile, done) {
       process.nextTick(function() {
-        console.log(profile);
+        db.findOne({ id: profile.id }, function(err, user) {
+          if (err) { return done(err); }
+          if (user) {
+            return done(err, user);  // We found a user! Return it.
+          } else {
+            var user = {
+              id: profile.id,
+              username: profile.username,
+              displayName: profile.displayName
+            }
+            db.insert(user, function(err, newDoc) {
+              done(err, newDoc);
+            })
+          }
+        });
       });
-      done(null, profile);
     }
   ));
 }
