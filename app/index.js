@@ -50,6 +50,8 @@ app.on('ready', function() {
 
   require('./config/passport')(passport);
 
+  expressApp.use('/public', express.static(path.join(__dirname, 'public')))
+
   // View engine configuration.
   expressApp.set('views', path.join(__dirname, 'views'));
   expressApp.set('view engine', 'handlebars');
