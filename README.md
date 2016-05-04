@@ -19,7 +19,6 @@ This is an attempt to re-envision Shiver as essentially a web application living
 ## Running
 
     $ npm start
+    $ webpack --progress --colors --watch
 
-## Build
-
-    $ npm run build
+(Run these in different tabs!)
