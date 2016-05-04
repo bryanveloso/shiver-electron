@@ -66,7 +66,7 @@ app.on('ready', function() {
   expressApp.use(passport.session());
   expressApp.set('port', port);
 
-  require('./routes')(expressApp, passport);
+  require('./config/routes')(expressApp, passport);
 
   // Open the devtools.
   mainWindow.openDevTools();

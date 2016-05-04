@@ -6,7 +6,11 @@ const path = require('path');
 module.exports = function(app, passport) {
   app.get('/', function(req, res, next) {
     if (req.user) { console.log(req.user.displayName); }
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+    res.sendFile(path.resolve(__dirname, '../public', 'index.html'))
+  });
+
+  app.get('/user', function(req, res) {
+
   });
 
   app.get('/auth/twitch', passport.authenticate('twitch'));
