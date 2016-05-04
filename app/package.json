@@ -11,7 +11,6 @@
     "cookie-session": "2.0.0-alpha.1",
     "dotenv": "2.0.0",
     "electron-debug": "^0.7.0",
-    "electron-prebuilt": "0.37.7",
     "express": "4.13.4",
     "express-handlebars": "3.0.0",
     "morgan": "1.7.0",
