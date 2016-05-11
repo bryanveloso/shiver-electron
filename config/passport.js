@@ -14,7 +14,7 @@ passport.use(new TwitchStrategy({
       clientID: config.twitch.clientID,
       clientSecret: config.twitch.clientSecret,
       callbackURL: config.twitch.callbackURL,
-      scope: config.twitch.scope,
+      scope: config.twitch.scope
     },
     function(accessToken, refreshToken, profile, done) {
       process.nextTick(function() {

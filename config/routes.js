@@ -5,8 +5,6 @@ import passport from './passport';
 import path from 'path';
 const router = express.Router();
 
-passport.initialize();
-
 router.get('/user', function(req, res) {
   if (req.user) {
     console.log(req.user.displayName);

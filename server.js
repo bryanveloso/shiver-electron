@@ -1,16 +1,35 @@
 /* eslint no-console: 0 */
 
+
 import express from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import cookieSession from 'cookie-session';
+
+import http from 'http';
+const logger = require('morgan');
+import path from 'path';
+
 import config from './webpack.config.development';
 import router from './config/routes';
+import passport from './config/passport';
 
 const app = express();
 const compiler = webpack(config);
 const PORT = 3000;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(cookieSession({ secret: 'shiver' }));
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,

@@ -7,7 +7,7 @@ var scope = [
   'user_subscriptions'
 ];
 
-var ids = {
+const ids = {
   twitch: {
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
@@ -16,4 +16,4 @@ var ids = {
   }
 };
 
-module.exports = ids;
+export default ids;
