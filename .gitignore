@@ -1,4 +1,5 @@
 .env
+config/user.db
 
 # ide project files
 /.idea
