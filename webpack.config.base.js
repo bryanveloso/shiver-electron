@@ -1,4 +1,6 @@
+import webpack from 'webpack';
 import path from 'path';
+require('dotenv').config({ silent: true });
 
 export default {
   module: {
@@ -21,7 +23,12 @@ export default {
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   plugins: [
-
+	  new webpack.DefinePlugin({
+		  'process.env': {
+			  TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
+			  TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET
+		  }
+	  })
   ],
   externals: [
     // put your node 3rd party libraries which can't be built with webpack here
