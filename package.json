@@ -82,6 +82,7 @@
     "keymirror": "^0.1.1",
     "morgan": "1.7.0",
     "nconf": "0.8.4",
+    "nedb": "1.8.0",
     "passport": "0.3.2",
     "passport-twitch": "1.0.2",
     "postcss": "^5.0.19",
