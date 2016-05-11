@@ -1,15 +1,16 @@
 'use strict';
 
-const TwitchStrategy = require('passport-twitch').Strategy;
-const config = require('./auth');
+import passport from 'passport';
+import { Strategy as TwitchStrategy } from 'passport-twitch';
+import db from './db';
+import config from './auth';
 
 
-module.exports = function(db, passport) {
-  passport.serializeUser(function(user, done) { done(null, user) });
-  passport.deserializeUser(function(user, done) { done(null, user) });
+passport.serializeUser(function(user, done) { done(null, user) });
+passport.deserializeUser(function(user, done) { done(null, user) });
 
-  // Twitch.
-  passport.use(new TwitchStrategy({
+// Twitch.
+passport.use(new TwitchStrategy({
       clientID: config.twitch.clientID,
       clientSecret: config.twitch.clientSecret,
       callbackURL: config.twitch.callbackURL,
@@ -26,7 +27,8 @@ module.exports = function(db, passport) {
               id: profile.id,
               username: profile.username,
               displayName: profile.displayName
-            }
+            };
+
             db.insert(user, function(err, newDoc) {
               done(err, newDoc);
             })
@@ -34,5 +36,6 @@ module.exports = function(db, passport) {
         });
       });
     }
-  ));
-}
+));
+
+export default passport;
