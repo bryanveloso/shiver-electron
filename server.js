@@ -22,14 +22,15 @@ const app = express();
 const compiler = webpack(config);
 const PORT = 3000;
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cookieSession({ secret: 'shiver' }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
@@ -41,7 +42,6 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 app.use(router);
 
-
 app.listen(PORT, 'localhost', err => {
   if (err) {
     console.error(err);
@@ -50,3 +50,4 @@ app.listen(PORT, 'localhost', err => {
 
   console.log(`Listening at http://localhost:${PORT}`);
 });
+
