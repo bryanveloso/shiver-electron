@@ -17,21 +17,26 @@ passport.use(new TwitchStrategy({
       scope: config.twitch.scope
     },
     function(accessToken, refreshToken, profile, done) {
+
       process.nextTick(function() {
-        db.findOne({ id: profile.id }, function(err, user) {
+		  db.findOne({ id: profile.id, type: 'user' }, (err, foundUser) => {
           if (err) { return done(err); }
-          if (user) {
-            return done(err, user);  // We found a user! Return it.
+          if (foundUser) {
+		    console.info(`found user in db: ${foundUser.username}`);
+            return done(err, foundUser);  // We found a user! Return it.
           } else {
-            var user = {
+
+            const user = {
               id: profile.id,
               username: profile.username,
-              displayName: profile.displayName
+              displayName: profile.displayName,
+			  logo: profile._json.logo,
+			  type: 'user'
             };
 
             db.insert(user, function(err, newDoc) {
               done(err, newDoc);
-            })
+            });
           }
         });
       });

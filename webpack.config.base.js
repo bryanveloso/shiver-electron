@@ -20,10 +20,17 @@ export default {
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+	alias: {
+	  'superagent': 'superagent/lib/client'
+	}
+  },
+  node: {
+	__dirname: true
   },
   plugins: [
 	  new webpack.DefinePlugin({
+		  'global.GENTLY': false,
 		  'process.env': {
 			  TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
 			  TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET

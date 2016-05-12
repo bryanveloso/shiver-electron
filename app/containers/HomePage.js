@@ -1,6 +1,19 @@
 import React from 'react';
+import request from 'superagent';
+
 
 const HomePage = React.createClass({
+  componentDidMount() {
+	  request.get('/user')
+		  .end((err, resp) => {
+			  if (err) {
+				  throw new Error(err);
+			  }
+			  else {
+				  console.log(resp.body);
+			  }
+		  });
+  },
   render() {
     return (
       <div>

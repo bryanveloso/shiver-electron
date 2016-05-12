@@ -29,8 +29,6 @@ app.use(cookieParser());
 app.use(cookieSession({ secret: 'shiver' }));
 
 app.use(passport.initialize());
-app.use(passport.session());
-
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
