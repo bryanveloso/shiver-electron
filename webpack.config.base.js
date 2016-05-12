@@ -25,16 +25,14 @@ export default {
 	  'superagent': 'superagent/lib/client'
 	}
   },
-  node: {
-	__dirname: true
-  },
   plugins: [
 	  new webpack.DefinePlugin({
-		  'global.GENTLY': false,
-		  'process.env': {
-			  TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
-			  TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET
-		  }
+		  'global.__BACKEND__': JSON.stringify('http://localhost:3030'),
+		  'global.GENTLY': false
+		  // Not confident we need these values in the client app or just on the express side
+		  //'global.TWITCH_CLIENT_ID': JSON.stringify(process.env.TWITCH_CLIENT_ID),
+		  //'global.TWITCH_CLIENT_SECRET': JSON.stringify(process.env.TWITCH_CLIENT_SECRET)
+
 	  })
   ],
   externals: [

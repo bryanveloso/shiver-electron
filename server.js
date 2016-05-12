@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 
+require('dotenv').config({ silent: true });
 
 import express from 'express';
 import webpack from 'webpack';
@@ -20,7 +21,8 @@ import passport from './config/passport';
 
 const app = express();
 const compiler = webpack(config);
-const PORT = 3000;
+const PORT = 3030;
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
