@@ -4,7 +4,7 @@ import request from 'superagent';
 
 const HomePage = React.createClass({
   componentDidMount() {
-	  request.get('/user')
+	  request.get('http://localhost:3000/user')
 		  .end((err, resp) => {
 			  if (err) {
 				  throw new Error(err);
