@@ -37,7 +37,11 @@ const HomePage = React.createClass({
     return (<a href={`${__BACKEND__}/auth/twitch`}>Login</a>);
   },
   getLoggedInContent() {
-	return (<Greeter {...this.props.user}/>)
+	return (
+		<div>
+			<a href={`${__BACKEND__}/logout`}>Logout</a>
+			<Greeter {...this.props.user}/>
+		</div>)
   },
   render() {
 	const content = this.props.user ? this.getLoggedInContent() : this.getLoggedOutContent();
