@@ -30,6 +30,14 @@ app.on('ready', () => {
     mainWindow.focus();
   });
 
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    if (url === 'http://localhost:3030/logout') {
+		mainWindow.webContents.session.clearStorageData(() => {
+			console.log('session data cleared');
+		});
+	}
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
