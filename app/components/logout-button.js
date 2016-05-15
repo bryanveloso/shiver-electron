@@ -5,7 +5,7 @@ const LogoutButton = React.createClass({
   handleClick(event) {
     event.preventDefault();
     Twitch.logout(() => {
-
+      require('electron').remote.getCurrentWindow().clearStorage();
     });
   },
   render() {

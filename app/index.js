@@ -1,6 +1,5 @@
 import React from 'react';
 import Twitch from 'twitch-sdk/twitch';
-global.T = Twitch;
 
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -34,7 +33,7 @@ Twitch.init(
     { clientId: global.TWITCH_CLIENT_ID, electron: true },
     (err, status) => {
       if (status.authenticated) {
-        handleLogin(status);
+        handleLogin();
       }
     });
 

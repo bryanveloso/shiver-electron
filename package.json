@@ -79,6 +79,7 @@
     "nconf": "0.8.4",
     "postcss": "^5.0.19",
     "react": "15.0.2",
+    "react-addons-pure-render-mixin": "^15.0.2",
     "react-dom": "15.0.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.2.4",

@@ -27,7 +27,9 @@ app.on('ready', () => {
     height: 728
   });
 
-  mainWindow.webContents.session.clearStorageData(() => {});
+  mainWindow.clearStorage = () => mainWindow.webContents.session.clearStorageData(() => {
+    console.log('storage data cleared');
+  });
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
