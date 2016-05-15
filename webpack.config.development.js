@@ -51,10 +51,8 @@ const config = {
         NODE_ENV: JSON.stringify('development')
       }
     })
-  ]
-	//,
-	// FIXME: figure out if this will block us from using notifications or what (defaulting to "node" in the base config).
-  //target: 'electron-renderer'
+  ],
+  target: 'electron-renderer'
 };
 
 export default config;

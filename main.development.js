@@ -1,3 +1,5 @@
+require('dotenv').config({ silent: true });
+
 import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
 
 let menu;
@@ -17,25 +19,21 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
+
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728
   });
 
-  mainWindow.loadURL(`http://localhost:3030/`);
+  mainWindow.webContents.session.clearStorageData(() => {});
+
+  mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.focus();
-  });
-
-  mainWindow.webContents.on('will-navigate', (event, url) => {
-    if (url === 'http://localhost:3030/logout') {
-		mainWindow.webContents.session.clearStorageData(() => {
-			console.log('session data cleared');
-		});
-	}
   });
 
   mainWindow.on('closed', () => {
