@@ -1,10 +1,11 @@
 require('dotenv').config({ silent: true });
-
-import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
+import path from 'path';
+import { app, BrowserWindow, Menu, crashReporter, shell, Tray } from 'electron';
 
 let menu;
 let template;
 let mainWindow = null;
+let appIcon = null;
 
 crashReporter.start();
 
@@ -19,9 +20,11 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
-
+  appIcon = new Tray(path.join(__dirname, 'twitch-white-24x24.png'));
+  appIcon.setTitle('Shiver.');
 
   mainWindow = new BrowserWindow({
+    title: 'Shiver.',
     show: false,
     width: 1024,
     height: 728
