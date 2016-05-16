@@ -26,7 +26,9 @@ const FollowingList = React.createClass({
     user: PropTypes.object.isRequired
   },
   componentDidMount() {
-    this.fetchItems();
+    if(this.props.user) {
+      this.fetchItems();
+    }
   },
   componentWillReceiveProps(nextProps) {
     if (nextProps.user && nextProps.user !== this.props.user) {
@@ -34,11 +36,9 @@ const FollowingList = React.createClass({
     }
   },
   fetchItems() {
-    if(this.props.user) {
-      Twitch.api({ method: 'streams/followed', stream_type: 'live' }, (err, resp) => {
-        this.props.actions.followedChannelsUpdated(resp.streams.map(x => x.channel));
-      });
-    }
+    Twitch.api({ method: 'streams/followed', stream_type: 'live' }, (err, resp) => {
+      this.props.actions.followedChannelsUpdated(resp.streams.map(x => x.channel));
+    });
   },
   formatChannel(channel) {
     return (<dl>

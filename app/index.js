@@ -30,12 +30,12 @@ Twitch.events.addListener('auth.login', handleLogin);
 Twitch.events.addListener('auth.logout', handleLogout);
 
 Twitch.init(
-    { clientId: global.TWITCH_CLIENT_ID, electron: true },
-    (err, status) => {
-      if (status.authenticated) {
-        handleLogin();
-      }
-    });
+  { clientId: global.TWITCH_CLIENT_ID, electron: true },
+  (err, status) => {
+    if (status.authenticated) {
+      handleLogin();
+    }
+  });
 
 render(
   <Provider store={store}>
