@@ -1,6 +1,7 @@
+import * as Immutable from 'immutable';
 
 
 export default {
-  followedChannels: [],
+  followedChannels: Immutable.Map(),
   user: null
 };

@@ -1,3 +1,4 @@
+import * as Immutable from 'immutable';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -5,11 +6,13 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Twitch from 'twitch-sdk/twitch';
 import { ActionCreators } from '../actions/followed-channels';
 
+const notify = require('electron').remote.getCurrentWindow().notify;
+
+const INTERVAL = 5000;
 
 function stateToProps(state) {
   return {
-    items: state.followedChannels,
-    user: state.user
+    items: state.followedChannels
   };
 }
 
@@ -22,22 +25,63 @@ function dispatchToProps(dispatch) {
 const FollowingList = React.createClass({
   mixins: [PureRenderMixin],
   propTypes: {
-    items: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired
+    items: PropTypes.instanceOf(Immutable.Map).isRequired
   },
   componentDidMount() {
-    if(this.props.user) {
-      this.fetchItems();
-    }
+    this.loopId = this.fetchItems(0);
   },
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user && nextProps.user !== this.props.user) {
-      this.fetchItems();
-    }
+    console.log(nextProps);
   },
-  fetchItems() {
-    Twitch.api({ method: 'streams/followed', stream_type: 'live' }, (err, resp) => {
-      this.props.actions.followedChannelsUpdated(resp.streams.map(x => x.channel));
+  componentWillUnmount() {
+    global.cancelAnimationFrame(this.loopId);
+  },
+  getInitialState() {
+    return { loopId: null };
+  },
+  fetchItems(lastDrain) {
+    return global.requestAnimationFrame(() => {
+      if (Date.now() - lastDrain > INTERVAL) {
+        Twitch.getStatus((err, status) => {
+          if (err) {
+            console.error(err);
+            this.loopId = this.fetchItems(lastDrain);
+          }
+          else {
+            if (status.authenticated) {
+              Twitch.api({
+                method: 'streams/followed',
+                stream_type: 'live'
+              }, (err, resp) => {
+                if (err) {
+                  console.error(err);
+                  this.loopId = this.fetchItems(lastDrain);
+                }
+                else {
+                  const chans = Immutable.Map(resp.streams.map(x => [x.channel._id, x.channel]));
+                  if (Immutable.is(chans, this.props.items)) {
+                    this.loopId = this.fetchItems(lastDrain);
+                  }
+                  else {
+                    const additions = chans.keySeq().toSet().subtract(this.props.items.keySeq().toSet());
+                    this.props.actions.followedChannelsUpdated(chans);
+
+                    additions.map(k => notify(chans.get(k).status)));
+
+                    this.loopId = this.fetchItems(Date.now());
+                  }
+                }
+              });
+            }
+            else {
+              this.loopId = this.fetchItems(lastDrain);
+            }
+          }
+        });
+      }
+      else {
+        this.loopId = this.fetchItems(lastDrain);
+      }
     });
   },
   formatChannel(channel) {
@@ -54,10 +98,9 @@ const FollowingList = React.createClass({
     return (
     <div>
       <h3>Followed Channels</h3>
-      <button onClick={this.fetchItems}>refresh</button>
-      {this.props.items.length ?
+      {this.props.items.size ?
           (<ul>
-            {this.props.items.map(x => <li key={x._id}>{this.formatChannel(x)}</li>)}
+            {this.props.items.toList().map(x => <li key={x._id}>{this.formatChannel(x)}</li>)}
           </ul>) :
           (<p>No channels found</p>)
       }

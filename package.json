@@ -75,6 +75,7 @@
     "css-modules-require-hook": "^4.0.0",
     "dotenv": "2.0.0",
     "electron-debug": "^0.7.0",
+    "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
     "nconf": "0.8.4",
     "postcss": "^5.0.19",
