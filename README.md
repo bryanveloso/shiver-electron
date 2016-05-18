@@ -41,3 +41,6 @@ then create a `.env` file in the root of your project dir with
     $ npm run start-hot
 
 (Run these in different tabs!)
+
+> Alternatively, you can run `npm run dev` in a single tab, but log output 
+  from each process will be merged (so it can be harder to read).

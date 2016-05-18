@@ -2,6 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Twitch from 'twitch-sdk/twitch';
 
 import { ActionCreators as UserActions } from '../actions/user'
 import Greeter from '../components/greeter';
@@ -9,15 +10,17 @@ import LoginButton from '../components/login-button';
 import LogoutButton from '../components/logout-button';
 import FollowingList from '../components/following-list';
 
-
 function stateToProps(state) {
 	return {
     user: state.user
   };
 }
 
+function dispatchToProps(dispatch) {
+  return { actions: bindActionCreators(UserActions, dispatch) };
+}
+
 const HomePage = React.createClass({
-  componentDidMount() {},
   getLoggedOutContent() {
     return (<LoginButton/>);
   },
@@ -40,4 +43,4 @@ const HomePage = React.createClass({
   }
 });
 
-export default connect(stateToProps)(HomePage);
+export default connect(stateToProps, dispatchToProps)(HomePage);

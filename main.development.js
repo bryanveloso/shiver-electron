@@ -34,12 +34,6 @@ app.on('ready', () => {
     console.log('storage data cleared');
   });
 
-  mainWindow.notify = (title, content) => {
-    console.log(`notify: ${title}`);
-    // looks as though this is windows only
-    //appIcon.displayBalloon({ title: title, content: content || title });
-  };
-
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
