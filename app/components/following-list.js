@@ -31,8 +31,27 @@ const FollowingList = React.createClass({
     console.info('fetch loop started');
   },
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    // TODO: can compare the item lists here to create notifications/alerts
+    const additions = nextProps.items.keySeq().toSet()
+        .subtract(this.props.items.keySeq().toSet());
+
+
+    const removals = this.props.items.keySeq().toSet()
+        .subtract(nextProps.items.keySeq().toSet());
+
+
+    additions.map(k => nextProps.items.get(k)).forEach(chan => {
+      new global.Notification(
+          chan.display_name,
+          { body: `Online: ${chan.status}`}
+      );
+    });
+
+    removals.map(k => this.props.items.get(k)).forEach(chan => {
+      new global.Notification(
+          chan.display_name,
+          { body: `Offline: ${chan.status}`}
+      );
+    });
   },
   componentWillUnmount() {
     global.cancelAnimationFrame(this.loopId);

@@ -1,18 +1,15 @@
 require('dotenv').config({ silent: true });
 import path from 'path';
-import { app, BrowserWindow, Menu, crashReporter, shell, Tray } from 'electron';
+import { app, BrowserWindow, Menu, shell, Tray } from 'electron';
 
 let menu;
 let template;
 let mainWindow = null;
 let appIcon = null;
 
-crashReporter.start();
-
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
 }
-
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
